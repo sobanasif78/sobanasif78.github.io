@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Soban Asif Awan — Computer Engineering & AI Systems</title>
+  <meta name="description" content="Portfolio of Soban Asif Awan, Computer Engineering Student at UET Taxila specializing in Generative AI, LLMs, and Digital Logic." />
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="bg-obsidian text-zinc-300 antialiased selection:bg-accent selection:text-black">
+  <!-- Subtle Dynamic Cursor Follower Glow -->
+  <div id="cursor-glow" class="pointer-events-none fixed -translate-x-1/2 -translate-y-1/2 rounded-full blur-[100px] opacity-20 transition-opacity duration-500 z-0"></div>
+
+  <!-- Toast Notification Container -->
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <!-- Navigation Header -->
+  <header class="fixed top-0 left-0 w-full z-50 transition-all duration-300 py-4 px-6 md:px-12" id="navbar">
+    <div class="max-w-7xl mx-auto flex items-center justify-between glass-nav rounded-full px-6 py-3 border border-white/10 backdrop-blur-md">
+      <a href="#hero" class="brand flex items-center gap-3 group">
+        <span class="w-3 h-3 rounded-full bg-accent animate-pulse"></span>
+        <span class="font-display font-bold tracking-tight text-white group-hover:text-accent transition-colors">SOBAN.A</span>
+      </a>
+
+      <!-- Desktop Nav -->
+      <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-zinc-400">
+        <a href="#about" class="nav-link hover:text-white transition-colors">About</a>
+        <a href="#education" class="nav-link hover:text-white transition-colors">Education</a>
+        <a href="#internship" class="nav-link hover:text-white transition-colors">Internship</a>
+        <a href="#projects" class="nav-link hover:text-white transition-colors">Projects</a>
+        <a href="#skills" class="nav-link hover:text-white transition-colors">Skills</a>
+        <a href="#contact" class="nav-link hover:text-white transition-colors">Contact</a>
+      </nav>
+
+      <!-- Action Button -->
+      <div class="hidden md:flex items-center gap-4">
+        <div class="status-badge flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono bg-white/5 border border-white/10 text-zinc-300">
+          <span class="w-2 h-2 rounded-full bg-accent"></span>
+          <span>Open for Collab</span>
+        </div>
+        <a href="#contact" class="btn-primary text-xs uppercase tracking-wider font-semibold px-4 py-2 rounded-full bg-accent text-black hover:scale-105 transition-transform flex items-center gap-1">
+          Let's Talk
+          <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
+        </a>
+      </div>
+
+      <!-- Mobile Menu Toggle -->
+      <button id="mobile-toggle" aria-label="Toggle navigation" class="md:hidden text-zinc-300 hover:text-white p-1">
+        <i data-lucide="menu" id="menu-icon" class="w-6 h-6"></i>
+      </button>
+    </div>
+
+    <!-- Mobile Drawer -->
+    <div id="mobile-drawer" class="mobile-drawer hidden md:hidden mt-3 max-w-7xl mx-auto rounded-2xl glass-nav p-6 border border-white/10 flex flex-col gap-4 text-center">
+      <a href="#about" class="mobile-nav-link text-zinc-300 py-2 hover:text-accent">About</a>
+      <a href="#education" class="mobile-nav-link text-zinc-300 py-2 hover:text-accent">Education</a>
+      <a href="#internship" class="mobile-nav-link text-zinc-300 py-2 hover:text-accent">Internship</a>
+      <a href="#projects" class="mobile-nav-link text-zinc-300 py-2 hover:text-accent">Projects</a>
+      <a href="#skills" class="mobile-nav-link text-zinc-300 py-2 hover:text-accent">Skills</a>
+      <a href="#contact" class="mobile-nav-link text-zinc-300 py-2 hover:text-accent font-semibold text-accent">Contact</a>
+    </div>
+  </header>
+
+  <main class="relative z-10 overflow-hidden">
+    
+    <!-- 1. HERO SECTION -->
+    <section id="hero" class="min-h-screen flex flex-col justify-center relative pt-28 pb-16 px-6 md:px-12 max-w-7xl mx-auto">
+      <!-- Background Interactive Canvas -->
+      <canvas id="hero-canvas" class="absolute inset-0 w-full h-full pointer-events-none opacity-40 z-0"></canvas>
+      
+      <div class="relative z-10 max-w-5xl">
+        <!-- Top Pill Tag -->
+        <div class="reveal-el inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-mono bg-white/5 border border-white/10 text-accent mb-6">
+          <i data-lucide="cpu" class="w-3.5 h-3.5"></i>
+          <span>UET TAXILA &bull; COMPUTER ENGINEERING &bull; CLASS OF '29</span>
+        </div>
+
+        <!-- Main Agency Hero Title -->
+        <h1 class="reveal-el font-display text-5xl sm:text-7xl lg:text-8xl font-extrabold tracking-tight text-white leading-[1.02] mb-6">
+          Soban Asif <br class="hidden sm:inline" />
+          <span class="text-stroke-accent hover:text-accent transition-colors duration-300">Awan</span>
+        </h1>
+
+        <!-- Focal Subheading with High Editorial Presence -->
+        <p class="reveal-el text-xl sm:text-2xl text-zinc-400 font-light max-w-3xl leading-relaxed mb-10">
+          Computer Engineering Student at <span class="text-white font-medium">UET Taxila</span>. Building at the intersection of <span class="text-white font-medium">Generative AI systems</span>, high-performance C++ software, and foundational digital hardware logic.
+        </p>
+
+        <!-- CTA Action Bar -->
+        <div class="reveal-el flex flex-wrap items-center gap-4">
+          <a href="#projects" class="btn-primary flex items-center gap-2 px-7 py-4 rounded-full bg-accent text-black font-semibold tracking-wide hover:shadow-[0_0_30px_rgba(200,255,0,0.35)] transition-all">
+            <span>Explore Projects</span>
+            <i data-lucide="arrow-down-right" class="w-4 h-4"></i>
+          </a>
+          <a href="#contact" class="btn-secondary flex items-center gap-2 px-7 py-4 rounded-full bg-white/5 border border-white/10 text-white font-medium hover:bg-white/10 transition-all">
+            <span>Get in Touch</span>
+          </a>
+          <div class="flex items-center gap-3 ml-2 text-zinc-500">
+            <span class="h-px w-8 bg-zinc-800"></span>
+            <span class="text-xs font-mono text-zinc-400">3rd Semester &bull; Spring '26</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hero Focal Visual / Floating Quick Spec Bar -->
+      <div class="reveal-el mt-16 pt-8 border-t border-white/10 grid grid-cols-2 md:grid-cols-4 gap-6 text-left">
+        <div class="stat-box">
+          <div class="text-xs font-mono text-zinc-500 mb-1">01 / DISCIPLINE</div>
+          <div class="text-white font-semibold text-base">Computer Engineering</div>
+        </div>
+        <div class="stat-box">
+          <div class="text-xs font-mono text-zinc-500 mb-1">02 / INSTITUTION</div>
+          <div class="text-white font-semibold text-base">UET Taxila</div>
+        </div>
+        <div class="stat-box">
+          <div class="text-xs font-mono text-zinc-500 mb-1">03 / SPECIALIZATION</div>
+          <div class="text-white font-semibold text-base">GenAI & LLM Pipelines</div>
+        </div>
+        <div class="stat-box">
+          <div class="text-xs font-mono text-zinc-500 mb-1">04 / CORE STACK</div>
+          <div class="text-white font-semibold text-base">C++, Python, Digital Logic</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. ABOUT SECTION -->
+    <section id="about" class="py-28 px-6 md:px-12 max-w-7xl mx-auto border-t border-white/5">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+        
+        <!-- Section Header Left -->
+        <div class="lg:col-span-4 reveal-el">
+          <span class="text-xs font-mono text-accent tracking-wider uppercase block mb-3">// 01. Profile & Philosophy</span>
+          <h2 class="font-display text-4xl sm:text-5xl font-bold text-white tracking-tight leading-tight">
+            Bridging Silicon to Intelligent Systems.
+          </h2>
+        </div>
+
+        <!-- Section Content Right -->
+        <div class="lg:col-span-8 space-y-8 reveal-el">
+          <p class="text-xl text-zinc-300 font-light leading-relaxed">
+            I am a <strong class="text-white font-medium">Computer Engineering student (3rd semester) at UET Taxila</strong> with a foundational background in <strong class="text-white font-medium">C++</strong>, driven by a deep interest in software development, algorithmic problem-solving, and low-level system design.
+          </p>
+          <p class="text-base text-zinc-400 leading-relaxed">
+            With solid grounding in computer systems and modern engineering principles, I enjoy deconstructing challenging problems into clean, robust code. My technical journey bridges the entire computing continuum—from discrete semiconductor diode logic and transistor circuitry up to cutting-edge <span class="text-white font-medium">Generative AI pipelines</span>, local LLM orchestration, and parameter-efficient model adaptations.
+          </p>
+
+          <!-- Focal Visual: Interactive Architecture Spec Box -->
+          <div class="focal-card rounded-2xl p-6 sm:p-8 bg-card border border-white/10 relative overflow-hidden group">
+            <div class="absolute -right-10 -bottom-10 w-40 h-40 bg-accent/10 rounded-full blur-3xl pointer-events-none group-hover:bg-accent/20 transition-all duration-700"></div>
+            
+            <div class="flex items-center justify-between border-b border-white/10 pb-4 mb-6">
+              <div class="flex items-center gap-2">
+                <span class="w-3 h-3 rounded-full bg-red-500/80"></span>
+                <span class="w-3 h-3 rounded-full bg-yellow-500/80"></span>
+                <span class="w-3 h-3 rounded-full bg-green-500/80"></span>
+                <span class="text-xs font-mono text-zinc-500 ml-2">soban@uet-taxila:~$ engineering_specs</span>
+              </div>
+              <span class="text-xs font-mono text-accent">Active Node</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 font-mono text-xs text-zinc-300">
+              <div class="space-y-3">
+                <div class="text-zinc-500 uppercase tracking-wider">// Core Academic Pillars</div>
+                <div class="flex items-center gap-2">
+                  <i data-lucide="check-circle-2" class="w-4 h-4 text-accent shrink-0"></i>
+                  <span>Data Structures & C++ Algorithms</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <i data-lucide="check-circle-2" class="w-4 h-4 text-accent shrink-0"></i>
+                  <span>Digital Logic Design & Circuits</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <i data-lucide="check-circle-2" class="w-4 h-4 text-accent shrink-0"></i>
+                  <span>Algorithmic Problem-Solving</span>
+                </div>
+              </div>
+              <div class="space-y-3">
+                <div class="text-zinc-500 uppercase tracking-wider">// Applied AI & Systems</div>
+                <div class="flex items-center gap-2">
+                  <i data-lucide="check-circle-2" class="w-4 h-4 text-accent shrink-0"></i>
+                  <span>RAG Pipelines & FAISS Embeddings</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <i data-lucide="check-circle-2" class="w-4 h-4 text-accent shrink-0"></i>
+                  <span>Local LLM Interfaces (Ollama/Streamlit)</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <i data-lucide="check-circle-2" class="w-4 h-4 text-accent shrink-0"></i>
+                  <span>PEFT / LoRA Fine-Tuning Adapters</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 3. EDUCATION SECTION -->
+    <section id="education" class="py-28 px-6 md:px-12 max-w-7xl mx-auto border-t border-white/5">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+        
+        <div class="lg:col-span-4 reveal-el">
+          <span class="text-xs font-mono text-accent tracking-wider uppercase block mb-3">// 02. Academic Foundation</span>
+          <h2 class="font-display text-4xl sm:text-5xl font-bold text-white tracking-tight">
+            Education
+          </h2>
+          <p class="text-zinc-400 mt-4 text-sm leading-relaxed">
+            Rigorous engineering curriculum combining hardware theory, mathematical modeling, and modern software paradigms.
+          </p>
+        </div>
+
+        <div class="lg:col-span-8 reveal-el">
+          <div class="education-card p-8 sm:p-10 rounded-3xl bg-card border border-white/10 relative overflow-hidden hover:border-accent/50 transition-all duration-300 group">
+            <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
+              <div>
+                <span class="inline-block px-3 py-1 rounded-full text-xs font-mono bg-accent/10 text-accent border border-accent/20 mb-3">
+                  Bachelor of Science (B.Sc.)
+                </span>
+                <h3 class="font-display text-2xl sm:text-3xl font-bold text-white">
+                  University of Engineering & Technology (UET) Taxila
+                </h3>
+              </div>
+              <div class="text-left sm:text-right">
+                <span class="text-2xl font-display font-bold text-accent">Class of 2029</span>
+                <p class="text-xs font-mono text-zinc-400">Current: 3rd Semester</p>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-6 border-t border-white/10 text-sm">
+              <div>
+                <span class="text-xs font-mono text-zinc-500 block mb-1">PROGRAM</span>
+                <span class="text-zinc-200 font-medium">Computer Engineering</span>
+              </div>
+              <div>
+                <span class="text-xs font-mono text-zinc-500 block mb-1">CAMPUS</span>
+                <span class="text-zinc-200 font-medium">Taxila, Punjab, Pakistan</span>
+              </div>
+              <div>
+                <span class="text-xs font-mono text-zinc-500 block mb-1">STATUS</span>
+                <span class="text-accent font-medium flex items-center gap-1.5">
+                  <span class="w-2 h-2 rounded-full bg-accent animate-ping"></span>
+                  Active Student (3rd Sem)
+                </span>
+              </div>
+            </div>
+
+            <div class="mt-8 pt-6 border-t border-white/10">
+              <h4 class="text-xs font-mono text-zinc-400 uppercase tracking-wider mb-4">Coursework & Concentrations</h4>
+              <div class="flex flex-wrap gap-2">
+                <span class="skill-tag">Object-Oriented Programming (C++)</span>
+                <span class="skill-tag">Digital Logic Design</span>
+                <span class="skill-tag">Circuit Analysis & Electronics</span>
+                <span class="skill-tag">Discrete Mathematics</span>
+                <span class="skill-tag">Computer Architecture</span>
+                <span class="skill-tag">Linear Algebra & Calculus</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 4. INTERNSHIP SECTION -->
+    <section id="internship" class="py-28 px-6 md:px-12 max-w-7xl mx-auto border-t border-white/5">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+        
+        <div class="lg:col-span-4 reveal-el">
+          <span class="text-xs font-mono text-accent tracking-wider uppercase block mb-3">// 03. Professional Immersion</span>
+          <h2 class="font-display text-4xl sm:text-5xl font-bold text-white tracking-tight leading-tight">
+            Internship & Training
+          </h2>
+          <p class="text-zinc-400 mt-4 text-sm leading-relaxed">
+            Intensive real-world immersion in state-of-the-art Generative AI frameworks, vector databases, and parameter-efficient fine-tuning.
+          </p>
+        </div>
+
+        <div class="lg:col-span-8 reveal-el">
+          <div class="internship-box p-8 sm:p-10 rounded-3xl bg-card border border-white/10 relative overflow-hidden group">
+            
+            <div class="flex flex-wrap items-start justify-between gap-4 mb-6">
+              <div>
+                <span class="text-xs font-mono text-accent tracking-wide uppercase bg-accent/10 px-3 py-1 rounded-full border border-accent/20">
+                  Arch Technologies &bull; 8 Weeks
+                </span>
+                <h3 class="font-display text-2xl sm:text-3xl font-bold text-white mt-3">
+                  Generative AI Internship and Training Program
+                </h3>
+              </div>
+              <span class="text-sm font-mono text-zinc-400 bg-white/5 px-3 py-1.5 rounded-lg border border-white/10">
+                March – April 2026
+              </span>
+            </div>
+
+            <p class="text-zinc-300 leading-relaxed text-sm sm:text-base mb-8">
+              Completed an intensive 8-week corporate training and internship program focused on end-to-end generative AI pipeline development, transformer model adaptations, and semantic retrieval systems.
+            </p>
+
+            <!-- Focal Milestones Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div class="p-5 rounded-2xl bg-white/[0.03] border border-white/5 hover:border-accent/40 transition-colors">
+                <div class="text-accent font-mono text-xs mb-1">// FOCUS 01</div>
+                <h4 class="text-white font-semibold text-sm mb-1.5">RAG & Vector Embeddings</h4>
+                <p class="text-xs text-zinc-400 leading-relaxed">Architected semantic retrieval systems using FAISS index structures, contextual chunking strategies, and sentence-transformers.</p>
+              </div>
+
+              <div class="p-5 rounded-2xl bg-white/[0.03] border border-white/5 hover:border-accent/40 transition-colors">
+                <div class="text-accent font-mono text-xs mb-1">// FOCUS 02</div>
+                <h4 class="text-white font-semibold text-sm mb-1.5">LoRA & PEFT Fine-Tuning</h4>
+                <p class="text-xs text-zinc-400 leading-relaxed">Trained Low-Rank Adaptation (LoRA) layers on Llama architectures to adapt foundation models efficiently for specialized domains.</p>
+              </div>
+
+              <div class="p-5 rounded-2xl bg-white/[0.03] border border-white/5 hover:border-accent/40 transition-colors">
+                <div class="text-accent font-mono text-xs mb-1">// FOCUS 03</div>
+                <h4 class="text-white font-semibold text-sm mb-1.5">Local LLM Orchestration</h4>
+                <p class="text-xs text-zinc-400 leading-relaxed">Deployed local inference runtimes with Ollama, building interactive Streamlit workspaces for real-time response streaming.</p>
+              </div>
+
+              <div class="p-5 rounded-2xl bg-white/[0.03] border border-white/5 hover:border-accent/40 transition-colors">
+                <div class="text-accent font-mono text-xs mb-1">// FOCUS 04</div>
+                <h4 class="text-white font-semibold text-sm mb-1.5">Multi-Modal Speech Reasoning</h4>
+                <p class="text-xs text-zinc-400 leading-relaxed">Coupled Whisper automatic speech recognition (ASR) with lightweight reasoning models for low-latency voice AI workflows.</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 5. PROJECTS SECTION -->
+    <section id="projects" class="py-28 px-6 md:px-12 max-w-7xl mx-auto border-t border-white/5">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6 reveal-el">
+        <div>
+          <span class="text-xs font-mono text-accent tracking-wider uppercase block mb-3">// 04. Selected Works</span>
+          <h2 class="font-display text-4xl sm:text-5xl font-bold text-white tracking-tight">
+            Featured Projects
+          </h2>
+          <p class="text-zinc-400 mt-2 text-sm max-w-xl">
+            A curated portfolio spanning intelligent neural pipelines, local inference tooling, and discrete semiconductor circuit design.
+          </p>
+        </div>
+
+        <!-- Category Filters -->
+        <div class="filter-container flex items-center gap-2 p-1.5 rounded-full bg-card border border-white/10 self-start md:self-auto overflow-x-auto max-w-full">
+          <button class="filter-btn active px-4 py-2 rounded-full text-xs font-mono transition-all cursor-pointer" data-filter="all">All (8)</button>
+          <button class="filter-btn px-4 py-2 rounded-full text-xs font-mono transition-all cursor-pointer" data-filter="software">Software & AI (5)</button>
+          <button class="filter-btn px-4 py-2 rounded-full text-xs font-mono transition-all cursor-pointer" data-filter="hardware">Hardware & Digital Logic (3)</button>
+        </div>
+      </div>
+
+      <!-- Project Cards Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="projects-grid">
+        
+        <!-- PROJECT 1: RAG Medical Q&A -->
+        <article class="project-card group rounded-3xl p-7 bg-card border border-white/10 hover:border-accent/60 transition-all duration-300 flex flex-col justify-between" data-category="software">
+          <div>
+            <div class="flex items-center justify-between mb-6">
+              <span class="text-xs font-mono text-accent bg-accent/10 px-3 py-1 rounded-full border border-accent/20">AI / NLP</span>
+              <span class="text-xs font-mono text-zinc-500">01</span>
+            </div>
+            <h3 class="font-display text-xl font-bold text-white group-hover:text-accent transition-colors mb-3">
+              RAG-based Medical Q&A Pipeline
+            </h3>
+            <p class="text-zinc-400 text-xs sm:text-sm leading-relaxed mb-6">
+              Production-ready Retrieval-Augmented Generation system designed for clinical query resolution. Ingests biomedical corpora into FAISS vector space with TinyLlama context synthesis.
+            </p>
+          </div>
+          <div>
+            <div class="flex flex-wrap gap-1.5 mb-6">
+              <span class="tech-pill">FAISS</span>
+              <span class="tech-pill">TinyLlama</span>
+              <span class="tech-pill">Embeddings</span>
+              <span class="tech-pill">Python</span>
+            </div>
+            <div class="flex items-center justify-between pt-4 border-t border-white/10 text-xs font-mono text-zinc-400">
+              <span class="flex items-center gap-1"><i data-lucide="layers" class="w-3.5 h-3.5 text-accent"></i> Vector RAG</span>
+              <span class="group-hover:translate-x-1 transition-transform text-white flex items-center gap-1">Architecture <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i></span>
+            </div>
+          </div>
+        </article>
+
+        <!-- PROJECT 2: Ollama Chat -->
+        <article class="project-card group rounded-3xl p-7 bg-card border border-white/10 hover:border-accent/60 transition-all duration-300 flex flex-col justify-between" data-category="software">
+          <div>
+            <div class="flex items-center justify-between mb-6">
+              <span class="text-xs font-mono text-accent bg-accent/10 px-3 py-1 rounded-full border border-accent/20">Local LLM</span>
+              <span class="text-xs font-mono text-zinc-500">02</span>
+            </div>
+            <h3 class="font-display text-xl font-bold text-white group-hover:text-accent transition-colors mb-3">
+              Ollama Chat Local Interface
+            </h3>
+            <p class="text-zinc-400 text-xs sm:text-sm leading-relaxed mb-6">
+              Privacy-first local LLM chat workstation featuring multi-model hot-switching, token streaming, context memory buffers, and custom system prompt presets.
+            </p>
+          </div>
+          <div>
+            <div class="flex flex-wrap gap-1.5 mb-6">
+              <span class="tech-pill">Streamlit</span>
+              <span class="tech-pill">Ollama</span>
+              <span class="tech-pill">Python</span>
+              <span class="tech-pill">Local Inference</span>
+            </div>
+            <div class="flex items-center justify-between pt-4 border-t border-white/10 text-xs font-mono text-zinc-400">
+              <span class="flex items-center gap-1"><i data-lucide="terminal" class="w-3.5 h-3.5 text-accent"></i> Web UI</span>
+              <span class="group-hover:translate-x-1 transition-transform text-white flex items-center gap-1">Architecture <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i></span>
+            </div>
+          </div>
+        </article>
+
+        <!-- PROJECT 3: Medical LoRA Adapter -->
+        <article class="project-card group rounded-3xl p-7 bg-card border border-white/10 hover:border-accent/60 transition-all duration-300 flex flex-col justify-between" data-category="software">
+          <div>
+            <div class="flex items-center justify-between mb-6">
+              <span class="text-xs font-mono text-accent bg-accent/10 px-3 py-1 rounded-full border border-accent/20">Model Fine-Tuning</span>
+              <span class="text-xs font-mono text-zinc-500">03</span>
+            </div>
+            <h3 class="font-display text-xl font-bold text-white group-hover:text-accent transition-colors mb-3">
+              Medical LoRA Fine-Tuning Adapter
+            </h3>
+            <p class="text-zinc-400 text-xs sm:text-sm leading-relaxed mb-6">
+              Parameter-Efficient Fine-Tuning (PEFT) framework targeting Llama-3-8B. Injects low-rank decomposition matrices into transformer attention heads for medical dialog reasoning.
+            </p>
+          </div>
+          <div>
+            <div class="flex flex-wrap gap-1.5 mb-6">
+              <span class="tech-pill">Llama-3-8B</span>
+              <span class="tech-pill">PEFT / LoRA</span>
+              <span class="tech-pill">PyTorch</span>
+              <span class="tech-pill">HuggingFace</span>
+            </div>
+            <div class="flex items-center justify-between pt-4 border-t border-white/10 text-xs font-mono text-zinc-400">
+              <span class="flex items-center gap-1"><i data-lucide="cpu" class="w-3.5 h-3.5 text-accent"></i> Weights & Adapter</span>
+              <span class="group-hover:translate-x-1 transition-transform text-white flex items-center gap-1">Architecture <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i></span>
+            </div>
+          </div>
+        </article>
+
+        <!-- PROJECT 4: Speech-to-Reasoning -->
+        <article class="project-card group rounded-3xl p-7 bg-card border border-white/10 hover:border-accent/60 transition-all duration-300 flex flex-col justify-between" data-category="software">
+          <div>
+            <div class="flex items-center justify-between mb-6">
+              <span class="text-xs font-mono text-accent bg-accent/10 px-3 py-1 rounded-full border border-accent/20">Multi-Modal</span>
+              <span class="text-xs font-mono text-zinc-500">04</span>
+            </div>
+            <h3 class="font-display text-xl font-bold text-white group-hover:text-accent transition-colors mb-3">
+              Speech-to-Reasoning Pipeline
+            </h3>
+            <p class="text-zinc-400 text-xs sm:text-sm leading-relaxed mb-6">
+              Asynchronous pipeline piping OpenAI Whisper acoustic speech transcription directly into TinyLlama logic nodes for immediate structured task reasoning and command execution.
+            </p>
+          </div>
+          <div>
+            <div class="flex flex-wrap gap-1.5 mb-6">
+              <span class="tech-pill">Whisper</span>
+              <span class="tech-pill">TinyLlama</span>
+              <span class="tech-pill">Audio Processing</span>
+              <span class="tech-pill">Python</span>
+            </div>
+            <div class="flex items-center justify-between pt-4 border-t border-white/10 text-xs font-mono text-zinc-400">
+              <span class="flex items-center gap-1"><i data-lucide="mic" class="w-3.5 h-3.5 text-accent"></i> Voice AI</span>
+              <span class="group-hover:translate-x-1 transition-transform text-white flex items-center gap-1">Architecture <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i></span>
+            </div>
+          </div>
+        </article>
+
+        <!-- PROJECT 5: Netflix Clone -->
+        <article class="project-card group rounded-3xl p-7 bg-card border border-white/10 hover:border-accent/60 transition-all duration-300 flex flex-col justify-between" data-category="software">
+          <div>
+            <div class="flex items-center justify-between mb-6">
+              <span class="text-xs font-mono text-accent bg-accent/10 px-3 py-1 rounded-full border border-accent/20">Frontend Engineering</span>
+              <span class="text-xs font-mono text-zinc-500">05</span>
+            </div>
+            <h3 class="font-display text-xl font-bold text-white group-hover:text-accent transition-colors mb-3">
+              Responsive Netflix Streaming UI
+            </h3>
+            <p class="text-zinc-400 text-xs sm:text-sm leading-relaxed mb-6">
+              Pixel-perfect streaming portal clone featuring dynamic catalog carousels, responsive grid transitions, modal preview dialogues, and clean semantic architecture.
+            </p>
+          </div>
+          <div>
+            <div class="flex flex-wrap gap-1.5 mb-6">
+              <span class="tech-pill">HTML5</span>
+              <span class="tech-pill">Vanilla CSS</span>
+              <span class="tech-pill">JavaScript</span>
+              <span class="tech-pill">DOM APIs</span>
+            </div>
+            <div class="flex items-center justify-between pt-4 border-t border-white/10 text-xs font-mono text-zinc-400">
+              <span class="flex items-center gap-1"><i data-lucide="layout" class="w-3.5 h-3.5 text-accent"></i> Web App</span>
+              <span class="group-hover:translate-x-1 transition-transform text-white flex items-center gap-1">Architecture <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i></span>
+            </div>
+          </div>
+        </article>
+
+        <!-- PROJECT 6: AND/OR Gate Logic using Diodes -->
+        <article class="project-card group rounded-3xl p-7 bg-card border border-white/10 hover:border-accent/60 transition-all duration-300 flex flex-col justify-between" data-category="hardware">
+          <div>
+            <div class="flex items-center justify-between mb-6">
+              <span class="text-xs font-mono text-accent bg-accent/10 px-3 py-1 rounded-full border border-accent/20">Digital Logic</span>
+              <span class="text-xs font-mono text-zinc-500">06</span>
+            </div>
+            <h3 class="font-display text-xl font-bold text-white group-hover:text-accent transition-colors mb-3">
+              AND/OR Gate Logic Using Diodes
+            </h3>
+            <p class="text-zinc-400 text-xs sm:text-sm leading-relaxed mb-6">
+              Constructed fundamental boolean logic gates via discrete semiconductor diodes and pull-up/down resistors. Verified voltage thresholds and truth table fidelity on breadboard.
+            </p>
+          </div>
+          <div>
+            <div class="flex flex-wrap gap-1.5 mb-6">
+              <span class="tech-pill">Semiconductor Diodes</span>
+              <span class="tech-pill">TTL Logic</span>
+              <span class="tech-pill">Breadboarding</span>
+              <span class="tech-pill">Boolean Algebra</span>
+            </div>
+            <div class="flex items-center justify-between pt-4 border-t border-white/10 text-xs font-mono text-zinc-400">
+              <span class="flex items-center gap-1"><i data-lucide="zap" class="w-3.5 h-3.5 text-accent"></i> Hardware</span>
+              <span class="group-hover:translate-x-1 transition-transform text-white flex items-center gap-1">Circuit Spec <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i></span>
+            </div>
+          </div>
+        </article>
+
+        <!-- PROJECT 7: Touch Sensor Using BC547 Transistor -->
+        <article class="project-card group rounded-3xl p-7 bg-card border border-white/10 hover:border-accent/60 transition-all duration-300 flex flex-col justify-between" data-category="hardware">
+          <div>
+            <div class="flex items-center justify-between mb-6">
+              <span class="text-xs font-mono text-accent bg-accent/10 px-3 py-1 rounded-full border border-accent/20">Analog Sensor</span>
+              <span class="text-xs font-mono text-zinc-500">07</span>
+            </div>
+            <h3 class="font-display text-xl font-bold text-white group-hover:text-accent transition-colors mb-3">
+              Touch Sensor via BC547 Transistor
+            </h3>
+            <p class="text-zinc-400 text-xs sm:text-sm leading-relaxed mb-6">
+              Designed a high-sensitivity touch switch circuit leveraging the high current gain (hFE) of a BC547 NPN bipolar junction transistor triggered by skin contact resistance.
+            </p>
+          </div>
+          <div>
+            <div class="flex flex-wrap gap-1.5 mb-6">
+              <span class="tech-pill">BC547 NPN</span>
+              <span class="tech-pill">BJT Biasing</span>
+              <span class="tech-pill">Analog Sensing</span>
+              <span class="tech-pill">Circuit Design</span>
+            </div>
+            <div class="flex items-center justify-between pt-4 border-t border-white/10 text-xs font-mono text-zinc-400">
+              <span class="flex items-center gap-1"><i data-lucide="activity" class="w-3.5 h-3.5 text-accent"></i> Solid State</span>
+              <span class="group-hover:translate-x-1 transition-transform text-white flex items-center gap-1">Circuit Spec <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i></span>
+            </div>
+          </div>
+        </article>
+
+        <!-- PROJECT 8: 8-bit ADC Converter Module -->
+        <article class="project-card group rounded-3xl p-7 bg-card border border-white/10 hover:border-accent/60 transition-all duration-300 flex flex-col justify-between" data-category="hardware">
+          <div>
+            <div class="flex items-center justify-between mb-6">
+              <span class="text-xs font-mono text-accent bg-accent/10 px-3 py-1 rounded-full border border-accent/20">Mixed Signal</span>
+              <span class="text-xs font-mono text-zinc-500">08</span>
+            </div>
+            <h3 class="font-display text-xl font-bold text-white group-hover:text-accent transition-colors mb-3">
+              8-Bit ADC Converter Module
+            </h3>
+            <p class="text-zinc-400 text-xs sm:text-sm leading-relaxed mb-6">
+              Built an 8-bit analog-to-digital quantization circuit utilizing resistor ladders and comparator networks to convert continuous voltage signals into discrete binary values.
+            </p>
+          </div>
+          <div>
+            <div class="flex flex-wrap gap-1.5 mb-6">
+              <span class="tech-pill">ADC Circuits</span>
+              <span class="tech-pill">R-2R Ladder</span>
+              <span class="tech-pill">Comparators</span>
+              <span class="tech-pill">Binary Quantization</span>
+            </div>
+            <div class="flex items-center justify-between pt-4 border-t border-white/10 text-xs font-mono text-zinc-400">
+              <span class="flex items-center gap-1"><i data-lucide="sliders" class="w-3.5 h-3.5 text-accent"></i> Data Acquisition</span>
+              <span class="group-hover:translate-x-1 transition-transform text-white flex items-center gap-1">Circuit Spec <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i></span>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- 6. SKILLS SECTION -->
+    <section id="skills" class="py-28 px-6 md:px-12 max-w-7xl mx-auto border-t border-white/5">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+        
+        <div class="lg:col-span-4 reveal-el">
+          <span class="text-xs font-mono text-accent tracking-wider uppercase block mb-3">// 05. Technical Arsenal</span>
+          <h2 class="font-display text-4xl sm:text-5xl font-bold text-white tracking-tight">
+            Skills & Competencies
+          </h2>
+          <p class="text-zinc-400 mt-4 text-sm leading-relaxed">
+            Bridging software engineering, machine learning pipelines, and discrete electronic hardware design.
+          </p>
+        </div>
+
+        <div class="lg:col-span-8 space-y-6 reveal-el">
+          
+          <!-- Category 1: AI & ML Systems -->
+          <div class="skill-category-card p-6 sm:p-8 rounded-3xl bg-card border border-white/10 hover:border-accent/40 transition-colors">
+            <div class="flex items-center gap-3 mb-6">
+              <div class="w-8 h-8 rounded-lg bg-accent/10 border border-accent/20 flex items-center justify-center text-accent">
+                <i data-lucide="sparkles" class="w-4 h-4"></i>
+              </div>
+              <h3 class="text-sm font-mono uppercase text-white font-semibold tracking-wider">Generative AI & LLM Systems</h3>
+            </div>
+            <div class="flex flex-wrap gap-2.5">
+              <span class="skill-badge-lg"><i data-lucide="cpu" class="w-3.5 h-3.5 text-accent"></i> Generative AI</span>
+              <span class="skill-badge-lg"><i data-lucide="box" class="w-3.5 h-3.5 text-accent"></i> LLMs</span>
+              <span class="skill-badge-lg"><i data-lucide="git-merge" class="w-3.5 h-3.5 text-accent"></i> PEFT / LoRA</span>
+              <span class="skill-badge-lg"><i data-lucide="database" class="w-3.5 h-3.5 text-accent"></i> RAG Pipelines</span>
+              <span class="skill-badge-lg"><i data-lucide="layout" class="w-3.5 h-3.5 text-accent"></i> Streamlit</span>
+            </div>
+          </div>
+
+          <!-- Category 2: Programming & Core Systems -->
+          <div class="skill-category-card p-6 sm:p-8 rounded-3xl bg-card border border-white/10 hover:border-accent/40 transition-colors">
+            <div class="flex items-center gap-3 mb-6">
+              <div class="w-8 h-8 rounded-lg bg-accent/10 border border-accent/20 flex items-center justify-center text-accent">
+                <i data-lucide="code-2" class="w-4 h-4"></i>
+              </div>
+              <h3 class="text-sm font-mono uppercase text-white font-semibold tracking-wider">Programming Languages & Web Stack</h3>
+            </div>
+            <div class="flex flex-wrap gap-2.5">
+              <span class="skill-badge-lg"><i data-lucide="terminal" class="w-3.5 h-3.5 text-accent"></i> Python</span>
+              <span class="skill-badge-lg"><i data-lucide="binary" class="w-3.5 h-3.5 text-accent"></i> C++</span>
+              <span class="skill-badge-lg"><i data-lucide="file-code" class="w-3.5 h-3.5 text-accent"></i> HTML5 / CSS3</span>
+              <span class="skill-badge-lg"><i data-lucide="code" class="w-3.5 h-3.5 text-accent"></i> JavaScript</span>
+            </div>
+          </div>
+
+          <!-- Category 3: Hardware & Digital Logic -->
+          <div class="skill-category-card p-6 sm:p-8 rounded-3xl bg-card border border-white/10 hover:border-accent/40 transition-colors">
+            <div class="flex items-center gap-3 mb-6">
+              <div class="w-8 h-8 rounded-lg bg-accent/10 border border-accent/20 flex items-center justify-center text-accent">
+                <i data-lucide="circuit-board" class="w-4 h-4"></i>
+              </div>
+              <h3 class="text-sm font-mono uppercase text-white font-semibold tracking-wider">Hardware & Digital Logic</h3>
+            </div>
+            <div class="flex flex-wrap gap-2.5">
+              <span class="skill-badge-lg"><i data-lucide="cpu" class="w-3.5 h-3.5 text-accent"></i> Digital Logic Design</span>
+              <span class="skill-badge-lg"><i data-lucide="zap" class="w-3.5 h-3.5 text-accent"></i> Circuit Design</span>
+              <span class="skill-badge-lg"><i data-lucide="activity" class="w-3.5 h-3.5 text-accent"></i> Diode Logic & Transistors</span>
+              <span class="skill-badge-lg"><i data-lucide="sliders" class="w-3.5 h-3.5 text-accent"></i> ADC & Signal Quantization</span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 7. CONTACT SECTION -->
+    <section id="contact" class="py-28 px-6 md:px-12 max-w-7xl mx-auto border-t border-white/5">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+        
+        <!-- Contact Intro -->
+        <div class="lg:col-span-6 reveal-el">
+          <span class="text-xs font-mono text-accent tracking-wider uppercase block mb-3">// 06. Initiate Connection</span>
+          <h2 class="font-display text-5xl sm:text-6xl font-bold text-white tracking-tight leading-none mb-6">
+            Let's Engineer <br />
+            <span class="text-accent">Together.</span>
+          </h2>
+          <p class="text-zinc-400 text-base leading-relaxed mb-8 max-w-md">
+            Whether you have a compelling project, research collaboration, internship opportunity, or simply want to discuss GenAI pipelines and systems engineering — my inbox is always open.
+          </p>
+
+          <!-- Direct Copy Actions -->
+          <div class="space-y-4">
+            <!-- Email Item with 1-Click Copy -->
+            <div class="p-4 rounded-2xl bg-card border border-white/10 flex items-center justify-between group">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-accent">
+                  <i data-lucide="mail" class="w-5 h-5"></i>
+                </div>
+                <div>
+                  <span class="text-xs font-mono text-zinc-500 block">DIRECT EMAIL</span>
+                  <span id="email-text" class="text-white font-medium text-sm sm:text-base select-all">sobanasif78@gmail.com</span>
+                </div>
+              </div>
+              <button id="copy-email-btn" class="px-3 py-2 rounded-xl bg-white/5 border border-white/10 hover:bg-accent hover:text-black hover:border-accent text-xs font-mono text-zinc-300 transition-all flex items-center gap-1.5 cursor-pointer">
+                <i data-lucide="copy" class="w-3.5 h-3.5"></i>
+                <span class="copy-label">Copy</span>
+              </button>
+            </div>
+
+            <!-- LinkedIn Link -->
+            <a href="https://www.linkedin.com/in/soban-asif-837118332" target="_blank" rel="noopener noreferrer" class="p-4 rounded-2xl bg-card border border-white/10 flex items-center justify-between group hover:border-accent/50 transition-all">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-accent">
+                  <i data-lucide="linkedin" class="w-5 h-5"></i>
+                </div>
+                <div>
+                  <span class="text-xs font-mono text-zinc-500 block">PROFESSIONAL NETWORK</span>
+                  <span class="text-white font-medium text-sm sm:text-base group-hover:text-accent transition-colors">linkedin.com/in/soban-asif-837118332</span>
+                </div>
+              </div>
+              <i data-lucide="arrow-up-right" class="w-5 h-5 text-zinc-500 group-hover:text-accent group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all"></i>
+            </a>
+
+            <!-- GitHub Link -->
+            <a href="https://github.com/sobanasif78" target="_blank" rel="noopener noreferrer" class="p-4 rounded-2xl bg-card border border-white/10 flex items-center justify-between group hover:border-accent/50 transition-all">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-accent">
+                  <i data-lucide="github" class="w-5 h-5"></i>
+                </div>
+                <div>
+                  <span class="text-xs font-mono text-zinc-500 block">CODE REPOSITORIES</span>
+                  <span class="text-white font-medium text-sm sm:text-base group-hover:text-accent transition-colors">github.com/sobanasif78</span>
+                </div>
+              </div>
+              <i data-lucide="arrow-up-right" class="w-5 h-5 text-zinc-500 group-hover:text-accent group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Interactive Contact Form -->
+        <div class="lg:col-span-6 reveal-el">
+          <form id="contact-form" action="https://formspree.io/f/xjyvkqop" method="POST" class="p-8 rounded-3xl bg-card border border-white/10 relative space-y-6">
+            <h3 class="text-lg font-display font-semibold text-white">Send a Direct Message</h3>
+            
+            <div>
+              <label for="name" class="block text-xs font-mono text-zinc-400 mb-2 uppercase">Your Name</label>
+              <input type="text" id="name" name="name" required placeholder="Jane Doe" class="w-full px-4 py-3 rounded-xl bg-black/40 border border-white/10 text-white placeholder-zinc-600 focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-all text-sm font-sans" />
+            </div>
+
+            <div>
+              <label for="email" class="block text-xs font-mono text-zinc-400 mb-2 uppercase">Your Email</label>
+              <input type="email" id="email" name="email" required placeholder="jane@example.com" class="w-full px-4 py-3 rounded-xl bg-black/40 border border-white/10 text-white placeholder-zinc-600 focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-all text-sm font-sans" />
+            </div>
+
+            <div>
+              <label for="message" class="block text-xs font-mono text-zinc-400 mb-2 uppercase">Message</label>
+              <textarea id="message" name="message" rows="4" required placeholder="Hello Soban, I'd like to discuss a project..." class="w-full px-4 py-3 rounded-xl bg-black/40 border border-white/10 text-white placeholder-zinc-600 focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-all text-sm resize-none font-sans"></textarea>
+            </div>
+
+            <button type="submit" id="submit-btn" class="w-full py-4 rounded-xl bg-accent text-black font-semibold text-sm hover:opacity-95 hover:scale-[1.01] active:scale-[0.99] transition-all flex items-center justify-center gap-2 cursor-pointer font-sans">
+              <span>Transmit Message</span>
+              <i data-lucide="send" class="w-4 h-4"></i>
+            </button>
+          </form>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-white/10 py-12 px-6 md:px-12 bg-black/60 relative z-10">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
+      
+      <div class="flex items-center gap-3">
+        <span class="w-2.5 h-2.5 rounded-full bg-accent"></span>
+        <span class="font-display font-bold text-white text-sm">Soban Asif Awan</span>
+        <span class="text-zinc-600">&bull;</span>
+        <span class="text-xs font-mono text-zinc-500">Taxila, PK</span>
+      </div>
+
+      <!-- Timezone PKT Clock -->
+      <div class="flex items-center gap-2 text-xs font-mono text-zinc-400 bg-white/5 px-3 py-1.5 rounded-full border border-white/10">
+        <i data-lucide="clock" class="w-3.5 h-3.5 text-accent"></i>
+        <span>PKT (UTC+5):</span>
+        <span id="local-time" class="text-white font-medium">--:--:--</span>
+      </div>
+
+      <div class="flex items-center gap-6 text-xs text-zinc-500 font-mono">
+        <span>&copy; <span id="year">2026</span> Soban Asif Awan.</span>
+        <a href="#hero" class="hover:text-accent transition-colors flex items-center gap-1">
+          <span>Top</span>
+          <i data-lucide="chevron-up" class="w-3.5 h-3.5"></i>
+        </a>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- Main JavaScript File -->
+  <script src="script.js"></script>
+</body>
+</html>
