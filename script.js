@@ -1,6 +1,6 @@
 /**
  * Soban Asif Awan — Portfolio Script
- * Creative Agency Micro-interactions, Canvas Particles, Category Filters & Toast
+ * JoJo's Bizarre Adventure Manga/Comic Interactions & Canvas Particles
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   renderCursorGlow();
 
-  // 2. HERO INTERACTIVE CANVAS (Dynamic Particle Mesh)
+  // 2. HERO INTERACTIVE CANVAS (JoJo Saturated Particle Mesh)
   const canvas = document.getElementById('hero-canvas');
   if (canvas) {
     const ctx = canvas.getContext('2d');
@@ -53,7 +53,8 @@ document.addEventListener('DOMContentLoaded', () => {
         this.y = Math.random() * height;
         this.vx = (Math.random() - 0.5) * 0.7;
         this.vy = (Math.random() - 0.5) * 0.7;
-        this.radius = Math.random() * 2 + 1;
+        this.radius = Math.random() * 2.5 + 1.5;
+        this.isRed = Math.random() < 0.35;
       }
 
       update() {
@@ -76,8 +77,11 @@ document.addEventListener('DOMContentLoaded', () => {
       draw() {
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(200, 255, 0, 0.45)';
+        ctx.fillStyle = this.isRed ? 'rgba(230, 30, 30, 0.7)' : 'rgba(255, 204, 0, 0.7)';
         ctx.fill();
+        ctx.lineWidth = 1;
+        ctx.strokeStyle = '#000000';
+        ctx.stroke();
       }
     }
 
@@ -101,12 +105,12 @@ document.addEventListener('DOMContentLoaded', () => {
           const dist = Math.sqrt(dx * dx + dy * dy);
 
           if (dist < maxDistance) {
-            const alpha = (1 - dist / maxDistance) * 0.25;
+            const alpha = (1 - dist / maxDistance) * 0.35;
             ctx.beginPath();
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(particles[j].x, particles[j].y);
-            ctx.strokeStyle = `rgba(200, 255, 0, ${alpha})`;
-            ctx.lineWidth = 0.8;
+            ctx.strokeStyle = `rgba(255, 204, 0, ${alpha})`;
+            ctx.lineWidth = 1;
             ctx.stroke();
           }
         }
@@ -153,20 +157,20 @@ document.addEventListener('DOMContentLoaded', () => {
           card.style.display = 'flex';
           setTimeout(() => {
             card.style.opacity = '1';
-            card.style.transform = 'translateY(0) scale(1)';
+            card.style.transform = 'translateY(0)';
           }, 10);
         } else {
           card.style.opacity = '0';
-          card.style.transform = 'translateY(20px) scale(0.96)';
+          card.style.transform = 'translateY(20px)';
           setTimeout(() => {
             card.style.display = 'none';
-          }, 300);
+          }, 250);
         }
       });
     });
   });
 
-  // 5. TOAST NOTIFICATION SYSTEM
+  // 5. TOAST NOTIFICATION SYSTEM (JoJo Comic Speech Style)
   const toast = document.getElementById('toast');
   let toastTimer;
 
@@ -175,7 +179,7 @@ document.addEventListener('DOMContentLoaded', () => {
     clearTimeout(toastTimer);
 
     toast.innerHTML = `
-      <i data-lucide="${iconName}" class="w-4 h-4 text-accent"></i>
+      <i data-lucide="${iconName}" class="w-5 h-5 text-black"></i>
       <span>${message}</span>
     `;
     if (window.lucide) lucide.createIcons();
@@ -196,13 +200,13 @@ document.addEventListener('DOMContentLoaded', () => {
       try {
         await navigator.clipboard.writeText(email);
         const copyLabel = copyBtn.querySelector('.copy-label');
-        if (copyLabel) copyLabel.textContent = 'Copied!';
-        showToast('Email address copied to clipboard!');
+        if (copyLabel) copyLabel.textContent = 'COPIED!';
+        showToast('EMAIL COPIED TO CLIPBOARD!');
         setTimeout(() => {
           if (copyLabel) copyLabel.textContent = 'Copy';
         }, 2000);
       } catch (err) {
-        showToast('Copied: ' + email);
+        showToast('COPIED: ' + email);
       }
     });
   }
@@ -216,8 +220,8 @@ document.addEventListener('DOMContentLoaded', () => {
       const submitBtn = document.getElementById('submit-btn');
 
       submitBtn.innerHTML = `
-        <i data-lucide="loader-2" class="w-4 h-4 animate-spin"></i>
-        <span>Transmitting...</span>
+        <i data-lucide="loader-2" class="w-5 h-5 animate-spin text-black"></i>
+        <span>TRANSMITTING...</span>
       `;
       if (window.lucide) lucide.createIcons();
 
@@ -230,32 +234,32 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         if (response.ok) {
-          showToast(`Thank you, ${name}! Your message has been sent.`);
+          showToast(`STAND POWER SENT! THANK YOU, ${name}!`);
           contactForm.reset();
           submitBtn.innerHTML = `
-            <span>Message Sent!</span>
-            <i data-lucide="check" class="w-4 h-4"></i>
+            <span>MESSAGE SENT!</span>
+            <i data-lucide="check" class="w-5 h-5"></i>
           `;
         } else {
-          showToast('Something went wrong. Please try again or email me directly.', 'alert-circle');
+          showToast('TRANSMISSION FAILED. PLEASE TRY AGAIN OR EMAIL DIRECTLY.', 'alert-circle');
           submitBtn.innerHTML = `
-            <span>Transmit Message</span>
-            <i data-lucide="send" class="w-4 h-4"></i>
+            <span>TRANSMIT MESSAGE</span>
+            <i data-lucide="send" class="w-5 h-5"></i>
           `;
         }
       } catch (err) {
-        showToast('Network error. Please try again or email me directly.', 'alert-circle');
+        showToast('NETWORK ERROR. PLEASE EMAIL DIRECTLY.', 'alert-circle');
         submitBtn.innerHTML = `
-          <span>Transmit Message</span>
-          <i data-lucide="send" class="w-4 h-4"></i>
+          <span>TRANSMIT MESSAGE</span>
+          <i data-lucide="send" class="w-5 h-5"></i>
         `;
       }
 
       if (window.lucide) lucide.createIcons();
       setTimeout(() => {
         submitBtn.innerHTML = `
-          <span>Transmit Message</span>
-          <i data-lucide="send" class="w-4 h-4"></i>
+          <span>TRANSMIT MESSAGE</span>
+          <i data-lucide="send" class="w-5 h-5"></i>
         `;
         if (window.lucide) lucide.createIcons();
       }, 3000);
@@ -267,7 +271,6 @@ document.addEventListener('DOMContentLoaded', () => {
   function updateTime() {
     if (!timeDisplay) return;
     const now = new Date();
-    // Pakistan Standard Time options
     const options = {
       timeZone: 'Asia/Karachi',
       hour: '2-digit',
@@ -311,7 +314,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   window.addEventListener('scroll', () => {
     let current = '';
-    const scrollPos = window.scrollY + 200;
+    const scrollPos = window.scrollY + 220;
 
     sections.forEach((section) => {
       const sectionTop = section.offsetTop;
@@ -322,13 +325,13 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     navLinks.forEach((link) => {
-      link.classList.remove('text-accent');
+      link.classList.remove('text-accent-yellow');
       if (link.getAttribute('href') === `#${current}`) {
-        link.classList.add('text-accent');
+        link.classList.add('text-accent-yellow');
       }
     });
 
-    // Navbar blur enhancement on scroll
+    // Navbar padding dynamic adjustment
     const navbar = document.getElementById('navbar');
     if (navbar) {
       if (window.scrollY > 50) {
